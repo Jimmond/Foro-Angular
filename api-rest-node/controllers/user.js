@@ -22,11 +22,16 @@ var controller={
         // Recoger los parametros de la peticion 
         var params = req.body;
         // Validar los datos
-        var validate_name = !validator.isEmpty(params.name);
-        var validate_surname = !validator.isEmpty(params.surname);
-        var validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
-        var validate_password = !validator.isEmpty(params.password);
-
+        try {
+            var validate_name = !validator.isEmpty(params.name);
+            var validate_surname = !validator.isEmpty(params.surname);
+            var validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+            var validate_password = !validator.isEmpty(params.password);
+        } catch (err) {
+            return res.status(200).send({
+                message: "Faltan datos"
+                 });
+        }
         if(validate_name && validate_surname && validate_email && validate_password){
             // Crea objeto de usuario
             var user = new User();
@@ -91,9 +96,14 @@ var controller={
         // Recoger los parametros de la peticion
         var params = req.body;
         // Validar los datos
-        var validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
-        var validate_password = !validator.isEmpty(params.password);
-
+        try {
+            var validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+            var validate_password = !validator.isEmpty(params.password);
+        } catch (err) {
+            return res.status(200).send({
+                message: "Faltan datos"
+                 });
+        }
         if(!validate_email || !validate_password){
                 return res.status(200).send({
                     message: "Datos erroneos, intenta de nuevo"
@@ -148,19 +158,61 @@ var controller={
     update: function(req, res){
 
         // Recoger datos del usuario 
+        var params = req.body;
+        // Validar datos
+        try {
+            var validate_name = !validator.isEmpty(params.name);
+            var validate_surname = !validator.isEmpty(params.surname);
+            var validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+        } catch (err) {
+            return res.status(200).send({
+                message: "Faltan datos"
+                 });
+        }
 
         // Eliminar propiedades innecesarios
+        delete params.password;
+        var userId = req.user.sub;
+        // Comprobar si el emal es unico
+        if(req.user.email != params.email){
+            User.findOne({email: params.email.toLowerCase()}, (err, user)=>{
 
+                if(err){
+                    return res.status(500).send({
+                        message: "Error al identificarse"
+                    });
+                }if(user && user.email == params.email){
+                    return res.status(200).send({
+                        message: "El email no puede ser modificado"
+                    });
+
+                }
+            });
+        }else{
+                
         // Buscar y actualizar documento
-        
-        // Devolver respuesta
+        User.findOneAndUpdate({_id:userId}, params, {new:true}, (err, userUpdated)=>{
+            
+                if(err){
+                    return res.status(500).send({
+                        status: 'Error',
+                        message: 'Error al actualizar'
+                    });
+                }
+                if(!userUpdated){
+                    return res.status(200).send({
+                        status: 'Error',
+                        message: 'No se a actializado el usuario'
+                    });
+                }
 
-        return res.status(200).send({
-            message: "Metodo de actualizacion de datos de usuario"
-        });
+                // Devolver respuesta
+                return res.status(200).send({
+                    status: 'success',
+                    user: userUpdated
+                });
+            });
+        }
     }
-
-
 };
-
 module.exports = controller;
