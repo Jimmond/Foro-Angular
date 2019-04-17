@@ -276,3 +276,5 @@ var controller={
     }//uploadAvatar funcion close
 };
 module.exports = controller;
+
+//klk  tamo aqui
