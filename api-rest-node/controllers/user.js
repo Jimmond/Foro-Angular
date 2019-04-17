@@ -273,7 +273,58 @@ var controller={
                 });
             });
         } 
-    }//uploadAvatar funcion close
+    },//uploadAvatar funcion close
+
+    avartar: function (req, res){
+        var fileName = req.params.fileName;
+        var pathFile = './uploads/user/'+ fileName;
+
+        fs.exists(pathFile, (exists)=>{
+            if (exists) {
+                return res.sendFile(path.resolve(pathFile));
+            }else{
+                return res.status(404).send({
+                    message: 'La imagen no existe'
+                });
+            }
+
+        });
+        
+    },
+
+    getUsers: function(req, res){
+        User.find().exec((err, users) =>{
+            if (err || !users) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No hay usaurios que motrar'
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                users
+            })
+        });
+
+    },
+    getUser: function(req, res){
+
+        var userId = req.params.userId;
+
+        User.findById(userId).exec((err, user)=>{
+
+                if (err || !user) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No existe el usaurios'
+                    });
+                }
+                return res.status(200).send({
+                    status: 'success',
+                    user
+                })
+        });
+    }
 };
 module.exports = controller;
 
