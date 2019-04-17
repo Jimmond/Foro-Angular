@@ -2,6 +2,8 @@
 
 var validator = require('validator');
 var bcrypt = require('bcrypt-nodejs');
+var fs = require('fs');
+var path = require('path');
 var User = require('../models/user');
 var jwt = require('../services/jwt');
 
@@ -213,6 +215,62 @@ var controller={
                 });
             });
         }
+    },
+    uploadAvatar: function(req, res){
+
+        // Configurar el modulo multiparty (md) routes/user.js
+
+        // Recoger el fichero de la peticion
+        var file_name = 'Avatar no subido...';
+
+
+        if(!req.files){
+            return res.status(404).send({
+                status: 'error',
+                message: file_name
+            });
+        }
+
+        // Conseguir el nombre y la extension del archivo
+
+        var file_path = req.files.file0.path;
+        var file_split = file_path.split('\\');
+
+        // nombre del archivo
+        var file_name = file_split[2];
+        // Extension del archivo
+        var ext_split = file_name.split('\.');
+        var file_ext = ext_split[1];
+
+
+        // Comprobar extension (solo imagenes), si no es valida borrar fichero subido
+        if (file_ext !='png' && file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif'){
+            fs.unlink(file_path, (err)=>{
+
+                return res.status(200).send({
+                    status: 'Error',
+                    message: 'La extencion del archivo no es valida',
+                });
+            });   
+        }else{
+            // Sacar el id del usuario identificado
+            var userId = req.user.sub;
+            // Buscar y actualizar documento bd
+            User.findOneAndUpdate({_id: userId},{image: file_name}, {new:true}, (err, userUpdated)=>{
+                if (err || !userUpdated) {
+                    // Devolver respuesta
+                    return res.status(500).send({
+                            status: 'error',
+                            message: 'Error al guardar el usuario',
+                    });
+                }
+                // Devolver respuesta
+                    return res.status(200).send({
+                        status: 'success',
+                        message: 'Upload Avatar',
+                });
+            });
+        } 
     }
 };
 module.exports = controller;
