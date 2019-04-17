@@ -215,7 +215,9 @@ var controller={
                 });
             });
         }
-    },
+    },//update funcion close
+
+    //uploadAvatar funcion open
     uploadAvatar: function(req, res){
 
         // Configurar el modulo multiparty (md) routes/user.js
@@ -271,6 +273,6 @@ var controller={
                 });
             });
         } 
-    }
+    }//uploadAvatar funcion close
 };
 module.exports = controller;
