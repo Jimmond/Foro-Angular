@@ -246,6 +246,40 @@ var controller = {
                     topic: topicRemoved
                     });
         });
+    },
+    search: function(req, res){
+
+        // Sacar string a busacr de la url
+        var searchString= req.params.search;
+
+        // Find or
+        Topic.find({"$or":[
+            {"title": { "$regex": searchString, "$options": "i"} },
+            {"content": { "$regex": searchString, "$options": "i"} },
+            {"code": { "$regex": searchString, "$options": "i"} },
+            {"lang": { "$regex": searchString, "$options": "i"} }
+        ]})
+        .sort([['date', 'descending']])
+        .exec((err, topics) =>{
+            if(err){
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'Error en la peticion'
+                });
+            }
+            if(!topics){
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No hay temas disponibles'
+                });
+
+            }
+            // Devolver resultado
+            return res.status(200).send({
+               status: 'success',
+               topics
+            });
+        });
     } 
 };
 module.exports = controller;
