@@ -2,18 +2,8 @@
   <h1>
     {{page_title}}
   </h1>
-  <hr>
 
-  <div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
-    El registro se ha completado correctamente, <a [routerLink]="['/login']">identificate aqui</a>
-  </div>
-  <div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
-      Ya existe un usuario con esas credenciales
-  </div>
-
-
-
-  <form class="col-md-5 ml-0 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+  <form class="col-md-5 ml-0 pl-0">
     <div class="form-group">
       <label for="name">Nombre</label>
       <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z]+"
@@ -53,7 +43,7 @@
         La contraseña no es valida
       </small>
     </div>
-    <input type="submit" value="{{page_title}}" class="btn btn-success" [disabled]="registerForm.invalid">
+    <input type="submit" value="{{page_title}}" class="btn btn-success">
 
   </form>
 </div>

@@ -13,10 +13,13 @@
           <a class="nav-link" [routerLink]="['/inicio']">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Ver temas</a>
+          <a class="nav-link" href="#">Temas</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="identity">
             <a class="nav-link" href="#">Crear temas</a>
+          </li>
+        <li class="nav-item" *ngIf="identity">
+            <a class="nav-link" href="#">Compañeros</a>
         </li>
         <li class="nav-item">
           &nbsp;&nbsp;
@@ -29,22 +32,22 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!identity">
               <a class="nav-link" [routerLink]="['/registro']">Registrate</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!identity">
                 <a class="nav-link" [routerLink]="['/login']">Login</a>
             </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="identity">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{identity.name + ' ' + identity.surname}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Panel de usuario</a>
             <a class="dropdown-item" href="#">Mi perfil</a>
-            <a class="dropdown-item" href="#">Ajustes</a>
+            <a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Cerrar sesion</a>
+            <a class="dropdown-item pointer" (click)="logout()">Cerrar sesion</a>
           </div>
         </li>
       </ul>

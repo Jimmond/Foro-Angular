@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit {
         }else{
           this.status = "error"
         }
+
+        form.reset();
       },
       error =>{
         this.status ='error';

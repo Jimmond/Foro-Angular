@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
     this._userService.register(this.user).subscribe(
       response =>{
 
-        alert('tamo aqui');
         if(response.user && response.user._id){
           this.status = 'success';
         }else{
