@@ -1,6 +1,8 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from './services/user.service';
+import { global } from './services/global';
+
 
 
 @Component({
@@ -13,6 +15,7 @@ export class AppComponent {
   public title = 'Foro-angular';
   public identity;
   public token;
+  public url;
   constructor(
     private _userService: UserService,
     private _router: Router,
@@ -20,6 +23,7 @@ export class AppComponent {
   ){
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+    this.url = global.url;
   }
 
   ngOnInit(){

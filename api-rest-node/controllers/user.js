@@ -292,7 +292,7 @@ var controller={
                 // Devolver respuesta
                     return res.status(200).send({
                         status: 'success',
-                        message: 'Upload Avatar',
+                        user: userUpdated
                 });
             });
         } 

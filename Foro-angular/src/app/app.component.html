@@ -38,6 +38,12 @@
             <li class="nav-item" *ngIf="!identity">
                 <a class="nav-link" [routerLink]="['/login']">Login</a>
             </li>
+
+            <li class="nav-item" *ngIf="identity">
+              <div class="avatar_mask">
+                <img src="{{url+'avatar/'+identity.image}}" class="avatar_nav">
+              </div>
+            </li>
       <li class="nav-item dropdown" *ngIf="identity">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{identity.name + ' ' + identity.surname}}
