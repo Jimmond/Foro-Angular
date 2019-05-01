@@ -298,9 +298,9 @@ var controller={
         } 
     },//uploadAvatar funcion close
 
-    avartar: function (req, res){
+    avatar: function (req, res){
         var fileName = req.params.fileName;
-        var pathFile = './uploads/user/'+ fileName;
+        var pathFile = './uploads/users/'+fileName;
 
         fs.exists(pathFile, (exists)=>{
             if (exists) {
