@@ -1,3 +1,50 @@
-<p>
-  list works!
-</p>
+<div class="col-lg-12">
+  <h3>{{page_title}}</h3>
+  <hr>
+  <table class="table table-hover">
+    <thead class="thead-default">
+      <tr>
+        <th>Titulo</th>
+        <th>Fecha</th>
+        <th>acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let topic of topics">
+        <td>{{topic.title}}</td>
+        <td>{{topic.date | amLocale: 'es' | amDateFormat: 'LL'}}</td>
+        <td>
+          <a [routerLink]="['/panel/editar', topic._id]" class="btn btn-warning mr-2">Editar</a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#modal'+topic._id">
+            Borrar
+          </button>
+
+          <!-- The Modal -->
+          <div class="modal" id="{{'modal'+topic._id}}">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">¿Estas seguro de querer borrar este tema?</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                 Vas a borrar el tema "{{topic.title}}" para siempre
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <a (click)="deleteTopic(topic._id)" type="button" class="btn btn-danger" data-dismiss="modal">Borrar</a>
+                  <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
