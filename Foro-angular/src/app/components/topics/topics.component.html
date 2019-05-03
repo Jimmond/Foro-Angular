@@ -1,3 +1,31 @@
-<p>
-  topics works!
-</p>
+<div class="col-lg-12 mt-3">
+  <h1>{{page_title}}</h1>
+  <hr>
+  <ul class="list-group list-topics">
+    <li class="list-group-item" *ngFor="let topic of topics">
+      <h4>
+        <a [routerLink]="['/tema', topic._id]">{{topic.title}}</a>
+      </h4>
+      <span class="badge badge-primary">
+        {{topic.user.name + ' ' + topic.user.surname}}
+      </span>
+
+      <span class="badge badge-light ml-2">
+        {{ topic.date | amLocale: 'es' | amTimeAgo }}
+      </span>
+      <a [routerLink]="['/tema', topic._id]" class="btn btn-sm btn-success float-right mx-auto d-block">Leer</a>
+    </li>
+  </ul>
+  <div class="clearflix"></div>
+  <!--  NAVEGACION DE PAGINACION -->
+  <ul class="pagination mt-4">
+    <li class="page-item">
+      <a class="page-link" [routerLink]="['/temas', prev_page]">&laquo;</a></li>
+
+    <li class="page-item" *ngFor="let num of number_pages">
+      <a class="page-link" [routerLink]="['/temas', num]">{{num}}</a></li>
+    <li class="page-item">
+
+      <a class="page-link" [routerLink]="['/temas', next_page]">&raquo;</a></li>
+  </ul>
+</div>
