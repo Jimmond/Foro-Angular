@@ -11,3 +11,12 @@
 .avatar_mask img{
     height: 40px;
 } 
+.avatar_mask_list {
+    width: 60px;
+    height: 60px;
+    border-radius: 900px;
+    overflow: hidden;
+}
+.avatar_mask_list img{
+    height: 60px;
+} 

@@ -71,4 +71,10 @@ export class UserService{
 
 
     }
+    getUsers():Observable<any>{
+        return this._http.get(this.url+'users')
+    }
+    getUser(userId):Observable<any>{
+        return this._http.get(this.url+'user/'+userId)
+    }
 }

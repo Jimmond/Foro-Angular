@@ -1,1 +1,0 @@
-db.getCollection('users').find({})

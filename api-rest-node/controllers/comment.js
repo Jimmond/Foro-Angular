@@ -49,10 +49,26 @@ var controller ={
                                 });
                             }
     
-                        // Devolver respuesta
-                        return res.status(200).send({
-                            status: 'success',
-                            topic
+                            Topic.findById(topic._id)
+                            .populate('user')
+                            .populate('comments.user')
+                            .exec((err, topic)=>{
+                                if (err) {
+                                    return res.status(500).send({
+                                            status: 'error',
+                                            message: 'Error en la peticion'
+                                        });
+                                } if (!topic) {
+                                    return res.status(404).send({
+                                        status: 'error',
+                                        message: 'No existe el tema'
+                                    });
+                                }
+                                // Devolver resultado
+                                return res.status(200).send({
+                                    status: 'success',
+                                    topic
+                                });
                         });
                     });
                  }else{
@@ -83,12 +99,12 @@ var controller ={
             Topic.findOneAndUpdate(
                 {"comments._id": commentId},
                 {
-                    "$set":{
-                        "comments.$.content":params.content
+                    "$set": {
+                        "comments.$.content": params.content
                     }
                 },
                 {new:true},
-                (err, topicUpdated)=>{
+                (err, topicUpdated) => {
                     if(err){
                         return res.status(500).send({
                             status: 'Error',
@@ -110,7 +126,7 @@ var controller ={
          }
     },
     delete: function(req, res){
-
+        
         // Sacar el id del topic y del comentario a borrar
         var topicId = req.params.topicId;
         var commentId = req.params.commentId;
@@ -134,24 +150,40 @@ var controller ={
             if (comment) {
                 comment.remove();
                 // Guardar el topic
-                topic.save((err)=>{
+                topic.save((err) => {
                     if(err){
                         return res.status(500).send({
                             status: 'Error',
                             message: 'Error en la peticion'
                         });
                     }
-                    // Devolver un resultado 
-                    return res.status(200).send({
-                        status: 'success',
-                        topic
+                    Topic.findById(topic._id)
+                    .populate('user')
+                    .populate('comments.user')
+                    .exec((err, topic)=>{
+                        if (err) {
+                            return res.status(500).send({
+                                    status: 'error',
+                                    message: 'Error en la peticion'
+                                });
+                        } if (!topic) {
+                            return res.status(404).send({
+                                status: 'error',
+                                message: 'No existe el tema'
+                            });
+                        }
+                        // Devolver resultado
+                        return res.status(200).send({
+                            status: 'success',
+                            topic
+                        });
                     });
                 });
             }else{
                 return res.status(404).send({
                     status: 'error',
                     message: 'No existe el comentario'
-                })
+                });
             }
         });
     }
