@@ -30,12 +30,11 @@ export class AddComponent implements OnInit {
     this.page_title = 'Crear nuevo tema';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.topic = new Topic('','','','','','',this.identity._id, null);
+    this.topic = new Topic('','','','',this.identity._id, null);
 
    }
 
   ngOnInit() {
-    console.log(this._topicService.prueba());
   }
 
   onSubmit(form){

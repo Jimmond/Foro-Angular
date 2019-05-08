@@ -18,7 +18,7 @@ import { Topic } from '../../models/topic';
 export class ProfileComponent implements OnInit {
 
   public user: User;
-  public topic: Topic[];
+  public topics: Topic[];
   public url: string;
 
   constructor(
@@ -52,9 +52,7 @@ export class ProfileComponent implements OnInit {
       }, 
       error => {
         console.log(error);
-      }
-    )
-
+      });
   }
 
   getTopics(userId){
@@ -68,5 +66,4 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       });
   }
-
 }

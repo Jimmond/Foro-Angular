@@ -2,9 +2,6 @@
   <div class="topic-data col-lg-7 float-left">
 
     <h1> {{topic.title}}</h1>
-    <span id="topic-content" class="badge badge-warning mr-2" *ngIf="topic.lang">
-      {{topic.lang}}
-    </span>
     <span class="badge badge-primary">
       {{topic.user.name + ' ' + topic.user.surname}}
     </span>
@@ -14,10 +11,6 @@
     </span>
     <p id="topic-content" class="mt-2">
       {{topic.content}}
-    </p>
-    <p id="topic-code" class="mt-2" *ngIf="topic.code">
-      <ngx-highlight-js lang="javaScript" code="{{topic.code}}">
-      </ngx-highlight-js>
     </p>
   </div>
 
@@ -62,7 +55,7 @@
               <span class="d-block">
                   {{comment.content}}
               </span>
-              <button (click)="deleteComment(comment.id)" class="btn btn-danger float-right" *ngIf="identity._id == comment.user._id">Borrar</button>
+              <button (click)="deleteComment(comment._id)" class="btn btn-danger float-right" *ngIf="identity._id == comment.user._id">Borrar</button>
         </li>
       </ul>
   </div>

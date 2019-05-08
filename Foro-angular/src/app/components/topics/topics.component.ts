@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Topic } from '../../models/topic';
 import { TopicService } from '../../services/topic.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -15,20 +16,23 @@ export class TopicsComponent implements OnInit {
 
   public page_title: string;
   public topics: Topic[];
+  public identity;
+  public token;
   public totalPages;
   public page;
   public next_page;
   public prev_page;
   public number_pages;
 
-
-
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _topicService: TopicService
+    private _topicService: TopicService,
+    private _userService: UserService
   ) { 
     this.page_title = 'Temas';
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
   }
 
   ngOnInit() {

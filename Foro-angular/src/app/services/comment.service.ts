@@ -23,11 +23,11 @@ export class CommentService{
 
         return this._http.post(this.url+'/comment/topic/'+topicId, params, {headers: headers});
     }
-
     delete(token, topicId, commentId ):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                        .set('Authorization', token);
 
         return this._http.delete(this.url+'comment/'+topicId+'/'+commentId, {headers: headers});                               
     }
+
 }

@@ -20,8 +20,6 @@ var comment = mongoose.model('Comment', CommentSchema);
 var TopicSchema = Schema({
     title: String,
     content: String,
-    code: String,
-    lang: String,
     date: { type: Date, default: Date.now },
     user: { type: Schema.ObjectId, ref: 'User' },
     comments: [CommentSchema]

@@ -32,7 +32,7 @@ export class EditComponent implements OnInit {
     this.page_title = 'Editar tema';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.topic = new Topic('','','','','','',this.identity._id, null);
+    this.topic = new Topic('','','','',this.identity._id, null);
     this.is_edit = true;
 
    }

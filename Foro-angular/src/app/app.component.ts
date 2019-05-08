@@ -16,6 +16,9 @@ export class AppComponent {
   public identity;
   public token;
   public url;
+  public search;
+
+
   constructor(
     private _userService: UserService,
     private _router: Router,
@@ -27,8 +30,6 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    console.log(this.identity);
-    console.log(this.token);
   }
 
   ngDoCheck(){
@@ -41,6 +42,15 @@ export class AppComponent {
     this.token = null;
     this._router.navigate(['/inicio']);
 
+  }
+  goSearch(){
+    if (this.search == ' ') {
+      alert('favor rellene el buscador')
+      
+    }else{
+    this._router.navigate(['/buscar', this.search]);
+    this.search = ' ';
+    }
   }
 
 

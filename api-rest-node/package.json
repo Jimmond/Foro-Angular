@@ -10,18 +10,18 @@
   "author": "Jimmy Ortiz",
   "license": "MIT",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "1.18.3",
-    "connect-multiparty": "2.2.0",
-    "multiparty": "4.2.1",
-    "express": "4.16.4",
-    "jwt-simple": "0.5.5",
-    "moment": "2.24.0",
-    "mongoose": "5.4.9",
-    "mongoose-paginate-v2": "1.0.20",
-    "validator": "10.11.0"
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.19.0",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.16.4",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.6",
+    "mongoose-paginate-v2": "^1.2.1",
+    "multiparty": "^4.2.1",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
-    "nodemon": "1.18.9"
+    "nodemon": "^1.19.0"
   }
 }
