@@ -20,6 +20,11 @@ export class SearchComponent implements OnInit {
   public no_paginate;
   public identity;
   public token;
+  public totalPages;
+  public page;
+  public next_page;
+  public prev_page;
+  public number_pages;
 
 
   constructor(

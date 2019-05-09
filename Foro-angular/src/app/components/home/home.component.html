@@ -5,15 +5,18 @@
           <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
         </div>
         <p>
-          <a class="btn btn-primary btn-lg mr-3" href="#">
+          <a class="btn btn-primary btn-lg mr-3" [routerLink]="['/temas']">
               Ver temas
           </a>
-          <a class="btn btn-success btn-lg mr-3" href="#">
+          <a class="btn btn-success btn-lg mr-3" [routerLink]="['/usuarios']">
               Ver compañeros
           </a>
-          <a class="btn btn-warning btn-lg mr-3" href="#">
+          <a *ngIf="identity" class="btn btn-warning btn-lg mr-3"  [routerLink]="['/panel/crear']">
               Añade nuevos temas
           </a>
+          <a *ngIf="!identity" class="btn btn-warning btn-lg mr-3" [routerLink]="['/login']">
+            Añade nuevos temas
+        </a>
         </p>
       </div>
 </div>

@@ -15,12 +15,14 @@
     <ul class="list-group list-topics mt-4">
       <li class="list-group-item" *ngFor="let topic of topics">
         <h4>
-          <a [routerLink]="['/tema', topic._id]">{{topic.title}}</a>
+          <a *ngIf="!identity" [routerLink]="['/login']">{{topic.title}}</a>
+          <a *ngIf="identity" [routerLink]="['/tema', topic._id]">{{topic.title}}</a>
         </h4>
         <span class="badge badge-light ">
           {{ topic.date | amLocale: 'es' | amTimeAgo }}
         </span>
-        <a [routerLink]="['/tema', topic._id]" class="btn btn-sm btn-success float-right mx-auto d-block">Leer</a>
+        <a *ngIf="!identity" [routerLink]="['/login']" class="btn btn-sm btn-success float-right mx-auto d-block">Leer</a>
+        <a *ngIf="identity" [routerLink]="['/tema', topic._id]" class="btn btn-sm btn-success float-right mx-auto d-block">Leer</a>
       </li>
     </ul>
     <div class="clearflix"></div>

@@ -17,8 +17,7 @@ var controller = {
         // Validar datos
         try {
            var validate_title = !validator.isEmpty(params.title);
-           var validate_content = !validator.isEmpty(params.content);;
-           var validate_lang = !validator.isEmpty(params.lang);;
+           var validate_content = !validator.isEmpty(params.content);
 
 
         } catch (err) {
@@ -27,7 +26,7 @@ var controller = {
             });
         }
 
-        if (validate_title && validate_content && validate_lang) {
+        if (validate_title && validate_content ) {
             
             // Crear objeto a guardar
             var topic = new Topic();
@@ -35,8 +34,6 @@ var controller = {
             // Asignar valores
             topic.title = params.title;
             topic.content = params.content;
-            topic.code = params.code;
-            topic.lang = params.lang;
             topic.user = req.user.sub;
 
             // Guardar el topic
@@ -174,8 +171,7 @@ var controller = {
         // Validar datos
         try {
             var validate_title = !validator.isEmpty(params.title);
-            var validate_content = !validator.isEmpty(params.content);;
-            var validate_lang = !validator.isEmpty(params.lang);;
+            var validate_content = !validator.isEmpty(params.content);
  
  
          } catch (err) {
@@ -184,14 +180,11 @@ var controller = {
              });
          }
 
-         if (validate_title && validate_content && validate_lang) {
+         if (validate_title && validate_content ) {
              // Montar un json con los datos modificables
             var update= {
                 title: params.title,
                 content: params.content,
-                code: params.code,
-                lang: params.lang
-
             };
             // Find and update del topic por id y por id de ususario
             Topic.findOneAndUpdate({_id: topicId, user: req.user.sub}, update, {new:true}, (err, topicUpdated)=>{
@@ -256,9 +249,7 @@ var controller = {
         // Find or
         Topic.find({"$or":[
             {"title": { "$regex": searchString, "$options": "i"} },
-            {"content": { "$regex": searchString, "$options": "i"} },
-            {"code": { "$regex": searchString, "$options": "i"} },
-            {"lang": { "$regex": searchString, "$options": "i"} }
+            {"content": { "$regex": searchString, "$options": "i"} }
         ]})
         .populate('user')
         .sort([['date', 'descending']])

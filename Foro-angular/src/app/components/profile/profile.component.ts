@@ -20,6 +20,8 @@ export class ProfileComponent implements OnInit {
   public user: User;
   public topics: Topic[];
   public url: string;
+  public identity;
+  public token;
 
   constructor(
     private _userService: UserService,
@@ -28,6 +30,8 @@ export class ProfileComponent implements OnInit {
     private _route: ActivatedRoute
   ) { 
     this.url = global.url;
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
   }
 
   ngOnInit() {

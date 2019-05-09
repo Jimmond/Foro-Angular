@@ -9,9 +9,11 @@
     <span class="badge badge-light ml-2">
       {{ topic.date | amLocale: 'es' | amTimeAgo }}
     </span>
-    <p id="topic-content" class="mt-2">
+    <div class="jumbotron text-justify mt-3">
+    <p id="topic-content" class="lead">
       {{topic.content}}
     </p>
+  </div>
   </div>
 
   <div class="clearfix"></div>
