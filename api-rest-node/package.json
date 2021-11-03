@@ -19,7 +19,7 @@
     "mongoose": "^5.7.5",
     "mongoose-paginate-v2": "^1.2.1",
     "multiparty": "^4.2.1",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
